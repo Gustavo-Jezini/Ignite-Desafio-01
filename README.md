@@ -6,7 +6,7 @@ Sejam todos muito bem-vindos ao primeiro desafio da trilha de Node.js do Ignite.
 
 Nesse desafio você reforçará de forma prática os **conceitos** que aprendemos nesse módulo.
 
-Como se trata de um desafio, ele necessita de alguns conhecimentos além dos abordados nesse módulo, então é importante que tenha autonomia para conseguir pesquisar essas coisas caso não saiba como resolver. Por isso, lembre-se, t**enha calma** e **acredite no seu processo.**
+Como se trata de um desafio, ele necessita de alguns conhecimentos além dos abordados nesse módulo, então é importante que tenha autonomia para conseguir pesquisar essas coisas caso não saiba como resolver. Por isso, lembre-se, **tenha calma** e **acredite no seu processo.**
 
 O aprendizado daqui é muito importante e com certeza você conseguirá sair com muito conhecimento bacana 💜
 

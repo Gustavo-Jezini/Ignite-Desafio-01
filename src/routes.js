@@ -1,37 +1,40 @@
+import { buildRoutePath } from "./utils/build-route-path.js"
+
+
 export const routes = [
   {
     method: 'GET',
-    path: 'tasks',
+    path: buildRoutePath('/tasks'),
     handler: (req, res) => {
-      return null
+      return 'GET'
     },
   },
   {
     method: 'POST',
-    path: 'tasks',
+    path: buildRoutePath('/tasks'),
     handler: (req, res) => {
-      return null
+      return 'POST'
     },
   },
   {
     method: 'PUT',
-    path: 'tasks/:id',
+    path: buildRoutePath('/tasks/:id'),
     handler: (req, res) => {
-      return null
+      return 'PUT'
     },
   },
   {
     method: 'PATCH',
-    path: 'task/:id/complete',
+    path: buildRoutePath('/tasks/:id/complete'),
     handler: (req, res) => {
-      return null
+      return 'PATCH'
     },
   },
   {
     method: 'DELETE',
-    path: 'task/:id',
+    path: buildRoutePath('/tasks/:id'),
     handler: (req, res) => {
-      return null
+      return 'DELETE'
     },
   }
 ]
