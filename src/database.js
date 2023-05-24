@@ -1,6 +1,14 @@
 import fs from 'node:fs/promises'
+import { randomUUID } from 'node:crypto'
 
 const databasePath = new URL('../db.json', import.meta.url)
+
+const infoToAddOnBody = {
+  id: randomUUID(),
+  completed_at: null,
+  created_at: new Date(),
+  updated_at: new Date()
+}
 
 export class Database {
   #database = {}
@@ -22,13 +30,12 @@ export class Database {
   }
   
   insert(table, body) {
-    // const data = this.#database[table] ?? { table }
-    // Não dá pra fazer dessa forma pois -> data: { table: 'tasks' }
+    const data = { ...body, ...infoToAddOnBody }
     
     if(Array.isArray(this.#database[table])) {
-      this.#database[table].push(body)
+      this.#database[table].push(data)
     } else {
-      this.#database[table] = [body]
+      this.#database[table] = [data]
     }
     
     this.#persist()
