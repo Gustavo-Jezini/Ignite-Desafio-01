@@ -44,7 +44,7 @@ export class Database {
     
     this.#persist()
     
-    return body;
+    return data;
   }
   
   update(table, id, body) {
