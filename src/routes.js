@@ -8,8 +8,10 @@ export const routes = [
   {
     method: 'GET',
     path: buildRoutePath('/tasks'),
-    handler: (_req, res) => {
-      const tasks = database.select('tasks')
+    handler: (req, res) => {
+      const { id } = (req.query);
+      const tasks = database.select('tasks', id)
+      
       return res.writeHead(200).end(JSON.stringify(tasks))
     },
   },
@@ -17,7 +19,7 @@ export const routes = [
     method: 'POST',
     path: buildRoutePath('/tasks'),
     handler: (req, res) => {
-      const isComplete = isBodyComplete(req, res);
+      const isComplete = isBodyComplete(req.body);
       
       if (isComplete) {
         database.insert('tasks', req.body)
@@ -50,6 +52,9 @@ export const routes = [
     method: 'PATCH',
     path: buildRoutePath('/tasks/:id/complete'),
     handler: (req, res) => {
+      const { id } = req.params
+      
+      
       return 'PATCH'
     },
   },

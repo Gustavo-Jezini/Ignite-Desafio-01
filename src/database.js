@@ -3,13 +3,6 @@ import { randomUUID } from 'node:crypto'
 
 const databasePath = new URL('../db.json', import.meta.url)
 
-const infoToAddOnBody = {
-  id: randomUUID(),
-  completed_at: null,
-  created_at: new Date(),
-  updated_at: new Date()
-}
-
 export class Database {
   #database = {}
   
@@ -23,13 +16,24 @@ export class Database {
     fs.writeFile(databasePath, JSON.stringify(this.#database))
   }
   
-  select(table) {
+  select(table, id) {
     const data = this.#database[table] ?? []
+    
+    if (id) {
+      return this.#database[table].find(task => task.id === id)
+    }
     
     return data
   }
   
   insert(table, body) {
+    const infoToAddOnBody = {
+      id: randomUUID(),
+      completed_at: null,
+      created_at: new Date(),
+      updated_at: new Date()
+    }
+    
     const data = { ...body, ...infoToAddOnBody }
     
     if(Array.isArray(this.#database[table])) {
