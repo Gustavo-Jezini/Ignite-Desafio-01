@@ -22,8 +22,8 @@ export class Database {
   }
   
   insert(table, body) {
-    // Não dá pra fazer dessa forma pois -> data: { table: 'tasks' }
     // const data = this.#database[table] ?? { table }
+    // Não dá pra fazer dessa forma pois -> data: { table: 'tasks' }
     
     if(Array.isArray(this.#database[table])) {
       this.#database[table].push(body)

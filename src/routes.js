@@ -1,4 +1,5 @@
 import { Database } from "./database.js"
+import { isBodyComplete } from "./middlewares/isBodyComplete.js"
 import { buildRoutePath } from "./utils/build-route-path.js"
 
 const database = new Database()
@@ -16,9 +17,14 @@ export const routes = [
     method: 'POST',
     path: buildRoutePath('/tasks'),
     handler: (req, res) => {
-      database.insert('tasks', req.body)
+      const isComplete = isBodyComplete(req.body);
       
-      return res.writeHead(201).end('Criado com sucesso!')
+      if (isComplete) {
+        database.insert('tasks', req.body)
+        return res.writeHead(201).end('Criado com sucesso!')
+      } else {
+        return res.writeHead(406).end('Informações faltando')
+      }
     },
   },
   {
