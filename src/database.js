@@ -16,15 +16,20 @@ export class Database {
   }
   
   select(table) {
-    const data = this.#database ?? []
+    const data = this.#database[table] ?? []
     
     return data
   }
   
   insert(table, body) {
-    const data = this.#database ?? []
+    // Não dá pra fazer dessa forma pois -> data: { table: 'tasks' }
+    // const data = this.#database[table] ?? { table }
     
-    data[table].push(body)
+    if(Array.isArray(this.#database[table])) {
+      this.#database[table].push(body)
+    } else {
+      this.#database[table] = [body]
+    }
     
     this.#persist()
     
