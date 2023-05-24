@@ -36,7 +36,7 @@ export const routes = [
       const isComplete = isBodyComplete(req.body);
       if (isComplete) {
         const { id } = req.params
-        const updateSuceeded = database.update('tasks', id, req.body)
+        const updateSuceeded = database.update('tasks', id, { ...req.body, updated_at: new Date()})
               
         return updateSuceeded
         ? res.writeHead(202).end('Atualizado com sucesso') 
@@ -54,8 +54,19 @@ export const routes = [
     handler: (req, res) => {
       const { id } = req.params
       
+      const task = database.select('tasks', id)
       
-      return 'PATCH'
+      if (!task) {
+        return res.writeHead(404).end('Tarefa não encontrada')
+      }
+
+      const isTaskCompleted = !!task.completed_at
+      const completed_at = isTaskCompleted ? null : new Date()
+      
+      database.update('tasks', id, { completed_at })
+
+      
+      return res.writeHead(204).end()
     },
   },
   {

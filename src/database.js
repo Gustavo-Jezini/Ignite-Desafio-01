@@ -54,7 +54,7 @@ export class Database {
     if (rowIndex > -1) {
       const data = this.#database[table][rowIndex]
       
-      const dataUpdated = { ...data, ...body, updated_at: new Date() }
+      const dataUpdated = { ...data, ...body }
       
       this.#database[table][rowIndex] = { id, ...dataUpdated }
       this.#persist()
