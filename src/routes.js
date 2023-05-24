@@ -31,7 +31,14 @@ export const routes = [
     method: 'PUT',
     path: buildRoutePath('/tasks/:id'),
     handler: (req, res) => {
-      return 'PUT'
+      const { id } = req.params
+      const updateSuceeded = database.update('tasks', id, req.body)
+      
+      if (updateSuceeded) {
+        return res.writeHead(202).end('Atualizado com sucesso') 
+      } else {
+        return res.writeHead(406).end('ID não encontrado')
+      }
     },
   },
   {
